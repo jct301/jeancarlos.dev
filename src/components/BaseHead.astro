@@ -45,15 +45,17 @@ const imageUrl = new URL(image, Astro.url).href;
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
+<meta content="1200" property="og:image:width" />
+<meta content="630" property="og:image:height" />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={imageUrl} />
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={canonicalURL} property="twitter:url" />
+<meta content={title} property="twitter:title" />
+<meta content={description} property="twitter:description" />
+<meta content={imageUrl} property="twitter:image" />
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -70,6 +72,8 @@ const imageUrl = new URL(image, Astro.url).href;
 <script is:inline src="/js/theme.js"></script>
 <script is:inline src="/js/scroll.js"></script>
 <script is:inline src="/js/animate.js"></script>
+
+<meta content={Astro.generator} name="generator" />
 
 <!-- <ViewTransitions  /> -->
 
