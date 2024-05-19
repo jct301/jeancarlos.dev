@@ -6,7 +6,7 @@ import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://jeancarlos.dev",
+  site: "https://jeancarlos-dev.vercel.app",
   integrations: [
     mdx(),
     sitemap(),
