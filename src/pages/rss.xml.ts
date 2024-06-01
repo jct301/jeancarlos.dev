@@ -10,10 +10,21 @@ export async function GET(context: Context) {
   const posts = await getCollection('blog')
   const projects = await getCollection('projects')
 
-  const items = [...posts, ...projects].sort(
+  const postsComplete = posts.map(({body,id,collection,data,render,slug}) => ({
+    id,
+    body,collection,data,render,slug:`/blog/${slug}`
+  }))
+
+  const projectsComplete = projects.map(({body,id,collection,data,render,slug}) => ({
+    id,
+    body,collection,data,render,slug:`/projects/${slug}`
+  }))
+
+  const items = [...postsComplete, ...projectsComplete].sort(
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
   )
 
+  console.log(items)
 
   return rss({
     title: SITE.TITLE,
@@ -23,9 +34,7 @@ export async function GET(context: Context) {
       title: item.data.title,
       description: item.data.summary,
       pubDate: item.data.date,
-      link: item.slug.startsWith('blog')
-        ? `/blog/${item.slug}/`
-        : `/projects/${item.slug}/`,
+      link: item.slug
     })),
   })
 }
