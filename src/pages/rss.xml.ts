@@ -16,7 +16,7 @@ export async function GET(context: Context) {
     collection,
     data,
     render,
-    slug: `/blog/${slug}`,
+    slug: `/articulos/${slug}`,
   }))
 
   const projectsComplete = projects.map(({ body, id, collection, data, render, slug }) => ({
@@ -25,7 +25,7 @@ export async function GET(context: Context) {
     collection,
     data,
     render,
-    slug: `/projects/${slug}`,
+    slug: `/proyectos/${slug}`,
   }))
 
   const items = [...postsComplete, ...projectsComplete].sort(
