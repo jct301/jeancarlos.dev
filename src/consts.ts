@@ -38,16 +38,16 @@ export const LINKS: Links = [
   },
   {
     TEXT: 'Experiencia',
-    HREF: '/work',
-  },
-  {
-    TEXT: 'Articulos',
-    HREF: '/blog',
+    HREF: '/experiencia',
   },
   {
     TEXT: 'Proyectos',
-    HREF: '/projects',
+    HREF: '/proyectos',
   },
+  {
+    TEXT: 'Articulos',
+    HREF: '/articulos',
+  }
 ]
 
 // Socials
@@ -62,7 +62,7 @@ export const SOCIALS: Socials = [
     NAME: 'Github',
     ICON: 'github',
     TEXT: 'jeancarlos',
-    HREF: 'https://github.com/jct301',
+    HREF: 'https://github.com/jean-carlos-tr',
   },
   {
     NAME: 'LinkedIn',

@@ -5,41 +5,32 @@ import { cn } from '@lib/utils'
 
 type Props = {
   tags: string[]
-  data: CollectionEntry<'blog'>[]
+  data: CollectionEntry<'articulos'>[]
 }
 
 export default function Blog({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>())
-  const [posts, setPosts] = createSignal<CollectionEntry<'blog'>[]>([])
+  const [posts, setPosts] = createSignal<CollectionEntry<'articulos'>[]>([])
 
   createEffect(() => {
     setPosts(
       data.filter((entry) =>
         Array.from(filter()).every((value) =>
-          entry.data.tags.some(
-            (tag: string) => tag.toLowerCase() === String(value).toLowerCase(),
-          ),
+          entry.data.tags.some((tag: string) => tag.toLowerCase() === String(value).toLowerCase()),
         ),
       ),
     )
   })
 
   function toggleTag(tag: string) {
-    setFilter(
-      (prev) =>
-        new Set(
-          prev.has(tag) ? [...prev].filter((t) => t !== tag) : [...prev, tag],
-        ),
-    )
+    setFilter((prev) => new Set(prev.has(tag) ? [...prev].filter((t) => t !== tag) : [...prev, tag]))
   }
 
   return (
     <div class='grid grid-cols-1 sm:grid-cols-3 gap-6'>
       <div class='col-span-3 sm:col-span-1'>
         <div class='sticky top-24'>
-          <div class='text-sm font-semibold uppercase mb-2 text-black dark:text-white'>
-            Filtrar
-          </div>
+          <div class='text-sm font-semibold uppercase mb-2 text-black dark:text-white'>Filtrar</div>
           <ul class='flex flex-wrap sm:flex-col gap-1.5'>
             <For each={tags}>
               {(tag) => (
@@ -61,14 +52,8 @@ export default function Blog({ data, tags }: Props) {
                         'transition-colors duration-300 ease-in-out',
                         filter().has(tag) && 'fill-black dark:fill-white',
                       )}>
-                      <use
-                        href={`/ui.svg#square`}
-                        class={cn(!filter().has(tag) ? 'block' : 'hidden')}
-                      />
-                      <use
-                        href={`/ui.svg#square-check`}
-                        class={cn(filter().has(tag) ? 'block' : 'hidden')}
-                      />
+                      <use href={`/ui.svg#square`} class={cn(!filter().has(tag) ? 'block' : 'hidden')} />
+                      <use href={`/ui.svg#square-check`} class={cn(filter().has(tag) ? 'block' : 'hidden')} />
                     </svg>
                     {tag}
                   </button>

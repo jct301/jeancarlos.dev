@@ -7,17 +7,25 @@ type Context = {
 }
 
 export async function GET(context: Context) {
-  const posts = await getCollection('blog')
-  const projects = await getCollection('projects')
+  const posts = await getCollection('articulos')
+  const projects = await getCollection('proyectos')
 
-  const postsComplete = posts.map(({body,id,collection,data,render,slug}) => ({
+  const postsComplete = posts.map(({ body, id, collection, data, render, slug }) => ({
     id,
-    body,collection,data,render,slug:`/blog/${slug}`
+    body,
+    collection,
+    data,
+    render,
+    slug: `/blog/${slug}`,
   }))
 
-  const projectsComplete = projects.map(({body,id,collection,data,render,slug}) => ({
+  const projectsComplete = projects.map(({ body, id, collection, data, render, slug }) => ({
     id,
-    body,collection,data,render,slug:`/projects/${slug}`
+    body,
+    collection,
+    data,
+    render,
+    slug: `/projects/${slug}`,
   }))
 
   const items = [...postsComplete, ...projectsComplete].sort(
@@ -34,7 +42,7 @@ export async function GET(context: Context) {
       title: item.data.title,
       description: item.data.summary,
       pubDate: item.data.date,
-      link: item.slug
+      link: item.slug,
     })),
   })
 }
